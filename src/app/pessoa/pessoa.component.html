@@ -1,0 +1,99 @@
+<p-growl [(value)]="growl"></p-growl>
+
+<p-confirmDialog header="Confirmação" icon="fa fa-question-circle" width="425"></p-confirmDialog>
+
+<div class="ui-g">
+  <div class="ui-g-4">
+    <p-button label="Cadastrar nova pessoa" (click)="novaPessoa()" icon="fa fa-plus" title="Cadastrar nova pessoa" iconPos="left"></p-button>
+  </div>
+</div>
+
+<p-table #dt [columns]="cols" [paginator]="true" [rows]="10" [value]="pessoas">
+
+  <ng-template pTemplate="caption">
+    <div style="text-align: right">
+      <i class="fa fa-search" style="margin:4px 4px 0 0"></i>
+      <input type="text" pInputText size="50" placeholder="Filtro" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width:auto">
+    </div>
+    <div class="ui-helper-clearfix">
+      <button type="button" pButton icon="fa-file-o" iconPos="left" label="Exportar" (click)="exportarExcel()" style="float:left"></button>
+    </div>
+  </ng-template>
+
+
+
+
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Nome</th>
+      <th>email</th>
+      <th>Telefone</th>
+      <th>CPF</th>
+      <th style="width: 10%;"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-pessoa>
+    <tr>
+      <td>{{pessoa.nome}}</td>
+      <td>{{pessoa.email}}</td>
+      <td>{{pessoa.telefone}}</td>
+      <td>{{pessoa.cpf}}</td>
+      <td>
+        <div class="ui-g-12">
+          <div class="ui-g-6">
+            <p-button title="Editar" (click)="selecionarPessoa(pessoa)" icon="fa fa-eye"></p-button>
+          </div>
+          <div class="ui-g-6">
+            <p-button title="Editar" (click)="deletarPessoa(pessoa.id)" icon="fa fa-eraser"></p-button>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog header="Title" [(visible)]="display">
+
+  <p-messages [(value)]="labelMsg"></p-messages>
+
+  <div class="ui-g">
+    <div class="ui-g-12 ui-inputgroup">
+      <span class="ui-inputgroup-addon">
+        <i class="fa fa-user"></i>
+      </span>
+      <input type="text" pInputText [(ngModel)]="pessoaSelecionada.nome" style="width: 100%;" pInputText placeholder="Nome" title="Nome completo">
+    </div>
+
+    <div class="ui-g-6 ui-inputgroup">
+      <span class="ui-inputgroup-addon">
+        <i class="fa fa-user"></i>
+      </span>
+      <input type="text" pInputText [(ngModel)]="pessoaSelecionada.cpf" style="width: 100%;" pInputText placeholder="CPF" title="CPF">
+    </div>
+    <div class="ui-g-6 ui-inputgroup">
+      <span class="ui-inputgroup-addon">
+        <i class="fa fa-phone"></i>
+      </span>
+        <p-inputMask mask="99-99999-9999" [(ngModel)]="pessoaSelecionada.telefone" pInputText placeholder="99-99999-9999"></p-inputMask>
+    </div>
+
+
+    <div class="ui-g-12 ui-inputgroup">
+      <span class="ui-inputgroup-addon">
+        <i class="fa fa-envelope"></i>
+      </span>
+      <input type="text" required pInputText [(ngModel)]="pessoaSelecionada.email" style="width: 100%;" pInputText placeholder="E-mail"
+        title="E-mail">
+    </div>
+
+    <div class="ui-inputgroup">
+      <div class="ui-g-6">
+        <p-button label="Salvar" (click)="salvar(pessoaSelecionada)" icon="fa fa-floppy-o" title="Salvar" iconPos="left"></p-button>
+      </div>
+      <div class="ui-g-6">
+        <p-button label="Fechar" (click)="fechar()" icon="fa fa-times-circle" title="Fechar" iconPos="left"></p-button>
+      </div>
+
+    </div>
+  </div>
+</p-dialog>
