@@ -68,13 +68,14 @@
       <span class="ui-inputgroup-addon">
         <i class="fa fa-user"></i>
       </span>
-      <input type="text" pInputText [(ngModel)]="pessoaSelecionada.cpf" style="width: 100%;" pInputText placeholder="CPF" title="CPF">
+      <p-inputMask [(ngModel)]="pessoaSelecionada.cpf" pInputText mask="999.999.999-99" placeholder="999.999.999-99" title="CPF"></p-inputMask>
+
     </div>
     <div class="ui-g-6 ui-inputgroup">
       <span class="ui-inputgroup-addon">
         <i class="fa fa-phone"></i>
       </span>
-        <p-inputMask mask="99-99999-9999" [(ngModel)]="pessoaSelecionada.telefone" pInputText placeholder="99-99999-9999"></p-inputMask>
+      <p-inputMask [(ngModel)]="pessoaSelecionada.telefone" pInputText  mask="(99)9999-9?9999"  placeholder="(99)9999-9999" title="telefone"></p-inputMask>
     </div>
 
 

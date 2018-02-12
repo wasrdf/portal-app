@@ -17,6 +17,7 @@ import {MenuModule} from 'primeng/menu';
 import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
+import {InputMaskModule} from 'primeng/inputmask';
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {MessageModule} from 'primeng/message';
     MenuModule,
     ConfirmDialogModule,
     MessagesModule,
-    MessageModule
+    MessageModule,
+    InputMaskModule
      
   ],
   providers: [PessoaService],

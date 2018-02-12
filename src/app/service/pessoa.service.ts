@@ -6,11 +6,8 @@ import { Pessoa } from "../model/pessoa.model";
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
-
 @Injectable()
 export class PessoaService {
-
-    private headers = new Headers({ 'Content-Type': 'application/json' });
 
     private api: string = "http://localhost:9090/api/pessoa";
 
