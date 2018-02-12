@@ -4,4 +4,6 @@ export class Pessoa {
     email:      string;
     telefone:   string;
     cpf:        string;
+    imagemPerfil: string;
+    foto: Blob;
 }

@@ -18,11 +18,14 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {InputMaskModule} from 'primeng/inputmask';
+import {FileUploadModule} from 'primeng/fileupload';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @NgModule({
   declarations: [
     AppComponent,
     PessoaComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -39,6 +42,7 @@ import {InputMaskModule} from 'primeng/inputmask';
     MessagesModule,
     MessageModule,
     InputMaskModule
+    
      
   ],
   providers: [PessoaService],

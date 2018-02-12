@@ -26,10 +26,9 @@ export class PessoaComponent implements OnInit {
   labelMsg: Message[] = [];
 
   cols: any[];
-
   constructor(private pessoaService: PessoaService, private confirmationService: ConfirmationService) { }
 
-  ngOnInit() {
+   ngOnInit() {
     this.listarPessoas();
 
     this.cols = [
@@ -37,9 +36,10 @@ export class PessoaComponent implements OnInit {
       { field: 'cpf', header: 'cpf' },
       { field: 'email', header: 'email' },
       { field: 'telefone', header: 'telefone' }
-  ];
+    ];
 
   }
+
 
   exportarExcel() {
 
@@ -76,6 +76,7 @@ export class PessoaComponent implements OnInit {
     this.display = true;
   }
 
+  
   fechar() {
     this.display = false;
   }
@@ -83,13 +84,11 @@ export class PessoaComponent implements OnInit {
   salvar(p: any) {
     if (this.validarCampos()) {
       if (p.id == null) {
-        this.criarPessoa(p)
-        //this.listarPessoas();
+        this.criarPessoa(p);
         this.display = false;
 
       } else {
         this.atualizarPessoa(p);
-        //this.listarPessoas();
         this.display = false;
       }
     }
@@ -148,6 +147,7 @@ export class PessoaComponent implements OnInit {
       return true;
     }
   }
+
 
 
 }

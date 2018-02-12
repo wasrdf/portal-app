@@ -33,4 +33,7 @@ export class PessoaService {
         return this.http.get<Pessoa>(this.api + "/pessoas/" + id);
     }
 
+    uploadFile(pessoa: Pessoa) {
+        return this.http.post(this.api + "/uploadFile", pessoa);
+    }
 }
