@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
-
+import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { PessoaComponent } from './pessoa/pessoa.component';
 import { PessoaService } from './service/pessoa.service';
@@ -18,14 +18,13 @@ import {ConfirmDialogModule} from 'primeng/confirmdialog';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {InputMaskModule} from 'primeng/inputmask';
-import {FileUploadModule} from 'primeng/fileupload';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+
 
 @NgModule({
   declarations: [
     AppComponent,
     PessoaComponent
-    
   ],
   imports: [
     BrowserModule,
@@ -41,9 +40,10 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
     ConfirmDialogModule,
     MessagesModule,
     MessageModule,
-    InputMaskModule
+    InputMaskModule,
+    FormsModule,
+    HttpModule
     
-     
   ],
   providers: [PessoaService],
   bootstrap: [AppComponent]

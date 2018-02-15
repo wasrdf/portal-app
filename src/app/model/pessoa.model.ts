@@ -3,7 +3,8 @@ export class Pessoa {
     nome:       string;
     email:      string;
     telefone:   string;
-    cpf:        string;
-    imagemPerfil: string;
-    foto: Blob;
+    cpf:        string;    
+    avatar:     string;
+    tipoImg:    string;
+
 }

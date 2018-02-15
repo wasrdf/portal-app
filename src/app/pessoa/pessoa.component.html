@@ -52,17 +52,30 @@
   </ng-template>
 </p-table>
 
-<p-dialog header="Title" [(visible)]="display">
 
+<p-dialog  header="Pessoa" [(visible)]="display">
+  
   <p-messages [(value)]="labelMsg"></p-messages>
 
   <div class="ui-g">
+
+    <div class="ui-g-3 ui-md-3 ui-inputgroup">
+      <img class="img-responsive img-thumbnail"  [src]="pessoaSelecionada.avatar" >
+    </div>
+    <div class="ui-g-12 ui-inputgroup"></div>
+
+    <div class="ui-g-4">
+        <input type="file" (change)="fileChanged($event)" name="foto" accept="image/*">
+    </div>
+
+
     <div class="ui-g-12 ui-inputgroup">
       <span class="ui-inputgroup-addon">
         <i class="fa fa-user"></i>
       </span>
       <input type="text" pInputText [(ngModel)]="pessoaSelecionada.nome" style="width: 100%;" pInputText placeholder="Nome" title="Nome completo">
     </div>
+
 
     <div class="ui-g-6 ui-inputgroup">
       <span class="ui-inputgroup-addon">

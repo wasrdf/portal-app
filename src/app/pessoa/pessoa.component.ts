@@ -4,8 +4,9 @@ import { Pessoa } from '../model/pessoa.model';
 import { Output } from '@angular/core/src/metadata/directives';
 import { Message, MenuItem } from 'primeng/api';
 import { ConfirmationService } from 'primeng/components/common/api';
-import { utils, write, WorkBook } from 'xlsx';
+import { utils, write, WorkBook, read } from 'xlsx';
 import { saveAs } from 'file-saver';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-pessoa',
@@ -26,9 +27,10 @@ export class PessoaComponent implements OnInit {
   labelMsg: Message[] = [];
 
   cols: any[];
-  constructor(private pessoaService: PessoaService, private confirmationService: ConfirmationService) { }
+  constructor(private pessoaService: PessoaService, private confirmationService: ConfirmationService,
+    private http: HttpClient) { }
 
-   ngOnInit() {
+  ngOnInit() {
     this.listarPessoas();
 
     this.cols = [
@@ -40,6 +42,38 @@ export class PessoaComponent implements OnInit {
 
   }
 
+  fileChanged(e: Event) {
+    var target: HTMLInputElement = e.target as HTMLInputElement;
+    for (var i = 0; i < target.files.length; i++) {
+      this.upload(target.files[i]);
+    }
+  }
+  upload(img: File) {
+    var formData: FormData = new FormData();
+    formData.append("image", img, img.name);
+    this.getBase64(img);//transforma a imagem em base64/blob 
+  }
+
+  //metodo responsavel por salvar no banco a foto em base64
+  getBase64(file) {
+    var reader = new FileReader();
+    var r = new FileReader();
+    
+    reader.readAsDataURL(file);
+    reader.onload = e => {
+      const b64  = reader.result;
+      this.uploadImg(b64);
+    };
+    this.pessoaSelecionada.tipoImg = file.type;
+  }
+
+  uploadImg(b64: any) {
+    console.log(b64);
+    this.pessoaSelecionada.avatar = b64;
+    this.pessoaService.uploadUrl(this.pessoaSelecionada);
+  }
+
+  
 
   exportarExcel() {
 
@@ -76,7 +110,7 @@ export class PessoaComponent implements OnInit {
     this.display = true;
   }
 
-  
+
   fechar() {
     this.display = false;
   }

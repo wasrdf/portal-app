@@ -2,6 +2,7 @@ import { OnInit } from "@angular/core/src/metadata/lifecycle_hooks";
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Pessoa } from "../model/pessoa.model";
+import { environment } from "../../environments/environment";
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -9,7 +10,7 @@ const httpOptions = {
 @Injectable()
 export class PessoaService {
 
-    private api: string = "http://localhost:9090/api/pessoa";
+    private api: string = `${environment.apiURL}/pessoa`;
 
     constructor(private http: HttpClient) { }
 
@@ -33,7 +34,7 @@ export class PessoaService {
         return this.http.get<Pessoa>(this.api + "/pessoas/" + id);
     }
 
-    uploadFile(pessoa: Pessoa) {
-        return this.http.post(this.api + "/uploadFile", pessoa);
-    }
+   uploadUrl(pessoa: Pessoa) {
+    return this.http.post(this.api.concat("/uploadFile"), pessoa);
+   }
 }
