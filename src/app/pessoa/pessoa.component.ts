@@ -27,8 +27,7 @@ export class PessoaComponent implements OnInit {
   labelMsg: Message[] = [];
 
   cols: any[];
-  constructor(private pessoaService: PessoaService, private confirmationService: ConfirmationService,
-    private http: HttpClient) { }
+  constructor(private pessoaService: PessoaService, private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
     this.listarPessoas();
@@ -42,12 +41,7 @@ export class PessoaComponent implements OnInit {
 
   }
 
-  fileChanged(e: Event) {
-    var target: HTMLInputElement = e.target as HTMLInputElement;
-    for (var i = 0; i < target.files.length; i++) {
-      this.upload(target.files[i]);
-    }
-  }
+ 
   upload(img: File) {
     var formData: FormData = new FormData();
     formData.append("image", img, img.name);
