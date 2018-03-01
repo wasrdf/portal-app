@@ -6,5 +6,8 @@ export class Pessoa {
     cpf:        string;    
     avatar:     string;
     tipoImg:    string;
-
+    dataCadastro: Date;
+    situacao: number;
+    sexo: string;
+    codProfissao: number;
 }

@@ -29,6 +29,7 @@
       <th>email</th>
       <th>Telefone</th>
       <th>CPF</th>
+      <th>Data de Cadastro</th>
       <th style="width: 10%;"></th>
     </tr>
   </ng-template>
@@ -38,6 +39,7 @@
       <td>{{pessoa.email}}</td>
       <td>{{pessoa.telefone}}</td>
       <td>{{pessoa.cpf}}</td>
+      <td>{{pessoa.dataCadastro}}</td>
       <td>
         <div class="ui-g-12">
           <div class="ui-g-6">
@@ -53,19 +55,19 @@
 </p-table>
 
 
-<p-dialog  header="Pessoa" [(visible)]="display">
-  
+<p-dialog header="Pessoa" [(visible)]="display">
+
   <p-messages [(value)]="labelMsg"></p-messages>
 
   <div class="ui-g">
 
     <div class="ui-g-3 ui-md-3 ui-inputgroup">
-      <img class="img-responsive img-thumbnail"  [src]="pessoaSelecionada.avatar" >
+      <img class="img-responsive img-thumbnail" [src]="pessoaSelecionada.avatar">
     </div>
     <div class="ui-g-12 ui-inputgroup"></div>
 
     <div class="ui-g-4">
-        <input type="file" (change)="fileChanged($event)" name="foto" accept="image/*">
+      <input type="file" (change)="fileChanged($event)" name="foto" accept="image/*">
     </div>
 
 
@@ -99,6 +101,18 @@
       <input type="text" required pInputText [(ngModel)]="pessoaSelecionada.email" style="width: 100%;" pInputText placeholder="E-mail"
         title="E-mail">
     </div>
+
+    <div class="ui-g-12 ui-inputgroup">
+      <p-dropdown [autoWidth]="false" [options]="sexo" [(ngModel)]="pessoaSelecionada.sexo" placeholder="Selecione o sexo"></p-dropdown>
+    </div>
+
+    <div class="ui-g-12 ui-inputgroup">
+      <select [(ngModel)]="pessoaSelecionada.codProfissao">
+        <option *ngFor="let p of profs" [ngValue]="p.codigo">{{p.descricao}}</option>
+      </select>
+  
+    </div>
+
 
     <div class="ui-inputgroup">
       <div class="ui-g-6">

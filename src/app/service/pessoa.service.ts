@@ -3,6 +3,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Pessoa } from "../model/pessoa.model";
 import { environment } from "../../environments/environment";
+import { Profissao } from "../model/profissao.model";
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -36,5 +37,9 @@ export class PessoaService {
 
    uploadUrl(pessoa: Pessoa) {
     return this.http.post(this.api.concat("/uploadFile"), pessoa);
+   }
+
+   carregarProfissoes() {
+       return this.http.get<any>(this.api.concat("/getAllProfissao"));
    }
 }

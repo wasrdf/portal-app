@@ -7,6 +7,10 @@ import { ConfirmationService } from 'primeng/components/common/api';
 import { utils, write, WorkBook, read } from 'xlsx';
 import { saveAs } from 'file-saver';
 import { HttpClient } from '@angular/common/http';
+import { DatePipe } from "@angular/common";
+import { SelectItem } from 'primeng/api';
+import { Profissao } from '../model/profissao.model';
+
 
 @Component({
   selector: 'app-pessoa',
@@ -22,16 +26,24 @@ export class PessoaComponent implements OnInit {
 
   texto: string;
 
+  profs: Array<any>;
+
   //mensagens
   growl: Message[] = [];
   labelMsg: Message[] = [];
 
+  sexo: SelectItem[];
+
+  profissoes: SelectItem[];
+
+  sexoSelecionado: string;
+
   cols: any[];
-  constructor(private pessoaService: PessoaService, private confirmationService: ConfirmationService) { }
+  constructor(private pessoaService: PessoaService, private confirmationService: ConfirmationService) {
+  }
 
   ngOnInit() {
     this.listarPessoas();
-
     this.cols = [
       { field: 'nome', header: 'Nome' },
       { field: 'cpf', header: 'cpf' },
@@ -39,9 +51,24 @@ export class PessoaComponent implements OnInit {
       { field: 'telefone', header: 'telefone' }
     ];
 
+    this.sexo = [
+      { label: 'Selecione o sexo', value: null },
+      { label: 'Masculino', value: 'M' },
+      { label: 'Feminino', value: 'F' }
+    ];
+
+    //carrega as profissoes
+    this.carregarProfissoes();
+
   }
 
- 
+  fileChanged(e: Event) {
+    var target: HTMLInputElement = e.target as HTMLInputElement;
+    for (var i = 0; i < target.files.length; i++) {
+      this.upload(target.files[i]);
+    }
+  }
+
   upload(img: File) {
     var formData: FormData = new FormData();
     formData.append("image", img, img.name);
@@ -52,22 +79,21 @@ export class PessoaComponent implements OnInit {
   getBase64(file) {
     var reader = new FileReader();
     var r = new FileReader();
-    
+
     reader.readAsDataURL(file);
     reader.onload = e => {
-      const b64  = reader.result;
+      const b64 = reader.result;
       this.uploadImg(b64);
     };
     this.pessoaSelecionada.tipoImg = file.type;
   }
 
   uploadImg(b64: any) {
-    console.log(b64);
     this.pessoaSelecionada.avatar = b64;
     this.pessoaService.uploadUrl(this.pessoaSelecionada);
   }
 
-  
+
 
   exportarExcel() {
 
@@ -109,12 +135,11 @@ export class PessoaComponent implements OnInit {
     this.display = false;
   }
 
-  salvar(p: any) {
+  salvar(p: Pessoa) {
     if (this.validarCampos()) {
       if (p.id == null) {
         this.criarPessoa(p);
         this.display = false;
-
       } else {
         this.atualizarPessoa(p);
         this.display = false;
@@ -177,5 +202,9 @@ export class PessoaComponent implements OnInit {
   }
 
 
-
+  carregarProfissoes() {
+    this.pessoaService.carregarProfissoes().subscribe(p => {
+      this.profs = p;
+    });    
+  }
 }

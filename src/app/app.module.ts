@@ -19,7 +19,7 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {InputMaskModule} from 'primeng/inputmask';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-
+import {DropdownModule} from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -42,7 +42,8 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
     MessageModule,
     InputMaskModule,
     FormsModule,
-    HttpModule
+    HttpModule,
+    DropdownModule
     
   ],
   providers: [PessoaService],
